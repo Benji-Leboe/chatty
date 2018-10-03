@@ -2,43 +2,45 @@
   "messages": [
     {
       "id": 1,
-      "type": "incomingMessage",
-      "content": "I won't be impressed with technology until I can download food.",
+      "timestamp": "2018-10-03T02:03:09.970Z",
+      "messageContent": "I won't be impressed with technology until I can download food.",
       "username": "Anonymous1"
-    },
-    {
-      "id": 2,
-      "type": "incomingNotification",
-      "content": "Anonymous1 changed their name to nomnom"
     },
     { 
       "id": 3,
-      "type": "incomingMessage",
-      "content": "I wouldn't want to download Kraft Dinner. I'd be scared of cheese packet loss.",
+      "timestamp": "2018-10-03T02:03:41.864Z",
+      "messageContent": "I wouldn't want to download Kraft Dinner. I'd be scared of cheese packet loss.",
       "username": "Anonymous2"
     },
     {
       "id": 4,
-      "type": "incomingMessage",
-      "content": "...",
+      "timestamp": "2018-10-03T02:04:08.878Z",
+      "messageContent": "...",
       "username": "nomnom"
     },
     {
       "id": 5,
-      "type": "incomingMessage",
-      "content": "I'd love to download a fried egg, but I'm afraid encryption would scramble it",
+      "timestamp": "2018-10-03T02:04:26.796Z",
+      "messageContent": "I'd love to download a fried egg, but I'm afraid encryption would scramble it",
       "username": "Anonymous2"
     },
     {
       "id": 6,
-      "type": "incomingMessage",
-      "content": "This isn't funny. You're not funny",
+      "timestamp": "2018-10-03T02:04:40.003Z",
+      "messageContent": "This isn't funny. You're not funny",
       "username": "nomnom"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 2,
+      "timestamp": "2018-10-03T02:03:22.954Z",
+      "notificationContent": "Anonymous1 changed their name to nomnom"
     },
     {
       "id": 7,
-      "type": "incomingNotification",
-      "content": "Anonymous2 changed their name to NotFunny"
+      "timestamp": "2018-10-03T02:04:54.522Z",
+      "notificationContent": "Anonymous2 changed their name to NotFunny"
     }
   ]
 }
