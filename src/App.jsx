@@ -5,6 +5,8 @@ import Chatbar from './ChatBar.jsx';
 import { messages, notifications } from './messages.json';
 import uuid from 'uuid/v1';
 
+
+
 class App extends Component {
   constructor() {
     super();
@@ -13,6 +15,7 @@ class App extends Component {
       messages: messages,
       notifications: notifications
     }
+    this.sock = new WebSocket('ws://localhost:3001');
   }
 
   addMessage = (message) => {
@@ -22,8 +25,9 @@ class App extends Component {
       username: this.state.currentUser,
       messageContent: message
     }
-    const messages = this.state.messages.concat(newMsg);
-    this.setState({ messages: messages });
+    this.sock.send(JSON.stringify(newMsg));
+    // const messages = this.state.messages.concat(newMsg);
+    // this.setState({ messages: messages });
   }
 
   addNotification = (notification) => {
@@ -45,14 +49,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      console.log('It\'s a simulation, bitches');
+    this.sock.onerror = (err) => {throw err};
+    // cs.onclose
 
-      const newMsg = {id: 8, timestamp:"2018-10-03T02:10:28.669Z", username: 'Michelle', messageContent: 'What up, fuckers'};
-      const messages = this.state.messages.concat(newMsg);
-      console.log(this.state.messages);
-      this.setState({messages: messages});
-    }, 3000);
+    this.sock.onopen = () => {
+      this.sock.send('YEET');
+    };
   }
 
   render() {

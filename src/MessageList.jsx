@@ -21,7 +21,6 @@ function MessageList(props) {
   });
 
   let chatList = messageElems.concat(notificationElems);
-  console.log(chatList);
   chatList.sort((a,b) => {
     return new Date(a.props["data-time"]) - new Date(b.props["data-time"]);
   });
