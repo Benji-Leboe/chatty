@@ -1,8 +1,9 @@
+
 var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'inline-module-source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     './src/index.jsx'
@@ -17,6 +18,9 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
+        options: {
+          "presets": ["es2015", "stage-0", "react"]
+        },
         include: path.join(__dirname, 'src')
       },
       {
