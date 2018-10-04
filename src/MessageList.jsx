@@ -10,7 +10,7 @@ function MessageList(props) {
   let elemArr = elems.map(message => {
     let { id, timestamp, content, username } = message;
     return (
-      <div key={ id.toString() } data-time={ timestamp } className="message">
+      <div key={ id.toString() } data-time={ timestamp } className={`${message.type}`}>
 
         {message.type === 'messages' && <span className="message-username">
           { username ? username : 'Anonymous' }
