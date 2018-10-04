@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
 
 function MessageList(props) {
-  let messageElems = props.messages.map(message => {
-    let { id, timestamp, messageContent, username } = message;
-    return (
-      <div key={id.toString()} data-time={timestamp} className="message">
-        <span className="message-username">{ username ? username : 'Anonymous' }</span>
-        <span className="message-content">{ messageContent }</span>
-      </div>
-    );
+  let elems = [...props.messages, ...props.notifications];
+
+  elems.sort((a, b) => {
+    return new Date(a.timestamp) - new Date(b.timestamp);
   });
 
-  let notificationElems = props.notifications.map(notification => {
-    let { id, timestamp, notificationContent } = notification;
+  let elemArr = elems.map(message => {
+    let { id, timestamp, content, username } = message;
     return (
-      <div key={id.toString()} data-time={timestamp} className="notification">
-        <span className="notification-content">{ notificationContent }</span>
+      <div key={ id.toString() } data-time={ timestamp } className="message">
+
+        {message.type === 'messages' && <span className="message-username">
+          { username ? username : 'Anonymous' }
+        </span>}
+
+        <span className={`${message.type}-content`}>{ content }</span>
       </div>
     );
-  });
-
-  let chatList = messageElems.concat(notificationElems);
-  chatList.sort((a,b) => {
-    return new Date(a.props["data-time"]) - new Date(b.props["data-time"]);
   });
 
   return (
-    <div>{chatList}</div>  
+    <div>{ elemArr }</div>  
   );
 }
 

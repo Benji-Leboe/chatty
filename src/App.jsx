@@ -18,32 +18,38 @@ class App extends Component {
     this.sock = new WebSocket('ws://localhost:3001');
   }
 
+  updateState = (entry, data, cb) => {
+    const newData = this.state[entry].concat(data);
+    this.setState({[entry]: newData}, () => {
+      cb && cb();
+    });
+  }
+
   addMessage = (message) => {
     const newMsg = {
       id: uuid(),
+      type: 'messages',
       timestamp: new Date(),
       username: this.state.currentUser,
-      messageContent: message
+      content: message
     }
     this.sock.send(JSON.stringify(newMsg));
-    // const messages = this.state.messages.concat(newMsg);
-    // this.setState({ messages: messages });
   }
 
   addNotification = (notification) => {
     const newNote = {
       id: uuid(),
+      type: 'notifications',
       timestamp: new Date(),
-      notificationContent: notification
+      content: notification
     }
-    const notifications = this.state.notifications.concat(newNote);
-    this.setState({ notifications: notifications });
+    this.sock.send(JSON.stringify(newNote));
   }
 
   updateCurrentUser = (user) => {
     let oldUsername = this.state.currentUser;
-
-    this.setState({ currentUser: user }, () => {
+    
+    this.setState({'currentUser': user}, () => {
       this.addNotification(`${oldUsername} changed their name to ${this.state.currentUser}`);
     }); 
   }
@@ -55,6 +61,12 @@ class App extends Component {
     this.sock.onopen = () => {
       this.sock.send('YEET');
     };
+
+    this.sock.onmessage = (event) => {
+      let data = JSON.parse(event.data);
+      console.log('Event message:', data.type, data);
+      this.updateState(data.type, data);
+    }
   }
 
   render() {

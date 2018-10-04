@@ -3,7 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'inline-module-source-map',
+  devtool: 'inline-source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     './src/index.jsx'
