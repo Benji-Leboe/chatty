@@ -18,10 +18,9 @@ class App extends Component {
     this.sock = new WebSocket('ws://localhost:3001');
   }
 
-  updateState = (entry, data, cb) => {
+  updateState = (entry, data) => {
     const newData = this.state[entry].concat(data);
     this.setState({[entry]: newData}, () => {
-      cb && cb();
     });
   }
 
