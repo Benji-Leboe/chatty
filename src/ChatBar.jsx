@@ -8,6 +8,33 @@ function Chatbar (props) {
     props.updateCurrentUser(user);
   }
 
+  function isValidUrl (string) {
+    try {
+      new URL(string);
+    } catch (err) {
+      return false;  
+    }
+    return true;
+  }
+
+  let re = /\/(.*?)\((.*?)\)/;
+
+
+  const chatMap = {
+    'img': function(url) {
+      return (<img src={ url } />);
+    },
+    'link': function(url, content) {
+      return (<a href={ url }> { content || url } </a>);
+    },
+    'bold': function(content) {
+      return (<strong>{ content }</strong>);
+    },
+    'ital': function(content) {
+      return (<em>{ content }</em>);
+    }
+  }
+
   function handleEnter(event) {
     if (event.key === 'Enter') {
       let content = event.target.value;

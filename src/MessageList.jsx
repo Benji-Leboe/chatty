@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 
 function MessageList(props) {
-  let elems = [...props.messages, ...props.notifications];
+  const elems = [...props.messages, ...props.notifications];
 
   elems.sort((a, b) => {
     return new Date(a.timestamp) - new Date(b.timestamp);
   });
 
-  let elemArr = elems.map(message => {
-    let { id, timestamp, content, username } = message;
+  const elemArr = elems.map(message => {
+    const { id, timestamp, content, user} = message;
+
+    let colorStyles = (user) ? {color: user.userColor} : {color: "#000000"};
+
     return (
       <div key={ id.toString() } data-time={ timestamp } className={`${message.type}`}>
 
-        {message.type === 'messages' && <span className="message-username">
-          { username ? username : 'Anonymous' }
+        {message.type === 'messages' && <span className="message-username" style={colorStyles}>
+          { user.username || 'Anonymous' }
         </span>}
 
-        <span className={`${message.type}-content`}>{ content }</span>
+        <span className={`${message.type}-content`}>{ content } {message.type === 'images' && <img className="image" src={ imgLink } />}</span>
+
+        
       </div>
     );
   });

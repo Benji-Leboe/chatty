@@ -1,49 +1,56 @@
 {
   "messages": [
     {
+      "status": "incoming",
       "id": 1,
       "type": "messages",
       "timestamp": "2018-10-03T02:03:09.970Z",
       "content": "I won't be impressed with technology until I can download food.",
-      "username": "Anonymous1"
+      "user": {"username": "Anonymous1", "userColor": "#eac70d"}
     },
     { 
+      "status": "incoming",
       "id": 3,
       "type": "messages",
       "timestamp": "2018-10-03T02:03:41.864Z",
       "content": "I wouldn't want to download Kraft Dinner. I'd be scared of cheese packet loss.",
-      "username": "Anonymous2"
+      "user": {"username": "Anonymous2", "userColor": "#6dc064"}
     },
     {
+      "status": "incoming",
       "id": 4,
       "type": "messages",
       "timestamp": "2018-10-03T02:04:08.878Z",
       "content": "...",
-      "username": "nomnom"
+      "user": {"username": "nomnom", "userColor": "#eac70d"}
     },
     {
+      "status": "incoming",
       "id": 5,
       "type": "messages",
       "timestamp": "2018-10-03T02:04:26.796Z",
       "content": "I'd love to download a fried egg, but I'm afraid encryption would scramble it",
-      "username": "Anonymous2"
+      "user": {"username": "Anonymous2", "userColor": "#6dc064"}
     },
     {
+      "status": "incoming",
       "id": 6,
       "type": "messages",
       "timestamp": "2018-10-03T02:04:40.003Z",
       "content": "This isn't funny. You're not funny",
-      "username": "nomnom"
+      "user": {"username": "nomnom", "userColor": "#eac70d"}
     }
   ],
   "notifications": [
     {
+      "status": "incoming",
       "id": 2,
       "type": "notifications",
       "timestamp": "2018-10-03T02:03:22.954Z",
       "content": "Anonymous1 changed their name to nomnom"
     },
     {
+      "status": "incoming",
       "id": 7,
       "type": "notifications",
       "timestamp": "2018-10-03T02:04:54.522Z",
