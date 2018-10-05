@@ -34,6 +34,9 @@ function isJSON(string) {
 
 wss.broadcast = (dataString) => {
   let data = JSON.parse(dataString);
+
+
+
   data.status = "incoming";
   wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
