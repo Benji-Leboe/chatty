@@ -11,7 +11,7 @@ function MessageList(props) {
       hash  = ((hash << 5) - hash) + chr;
       hash |= 0;
     }
-    return hash += (Math.random*10).toString().slice(2,4);
+    return hash += (Math.random*1000).toString(32).slice(2,6);
   };
 
   function isValidUrl (string) {
@@ -34,31 +34,28 @@ function MessageList(props) {
     }
     const regexed = content.match(re);
     const [, cmd, value] = regexed;
-    // const message = content.replace(find, "");
 
     return {cmd, value};
   }
 
   const chatMap = {
     'img': function(url) {
-      return (<span><br /><img key={url.hashish()} className="img-msg" src={ url } /><br /></span>);
+      return (<span><br /><img key={ url.hashish() } className="img-msg" src={ url } /><br /></span>);
     },
     'link': function(url, content) {
-      return (<a key={url.hashish()} href={ `//${url}` }> { content || url } </a>);
+      return (<a key={url.hashish()} href={ `//${url}` }>{ content || url } </a>);
     },
     'bold': function(content) {
       //console.log("test bold",content);
-      return (<strong key={content.hashish()}>{ content } </strong>);
+      return (<strong key={ content.hashish() }>{ content } </strong>);
     },
     'ital': function(content) {
-      return (<em key={content.hashish()}>{ content } </em>);
+      return (<em key={ content.hashish() }>{ content } </em>);
     },
     'under': function(content) {
-      return (<u key={content.hashish()}>{ content } </u>);
+      return (<u key={ content.hashish() }>{ content } </u>);
     }
   }
-  
-  
 
   elems.sort((a, b) => {
     return new Date(a.timestamp) - new Date(b.timestamp);
@@ -82,7 +79,7 @@ function MessageList(props) {
 
     console.log(parsed);
 
-    let colorStyles = (user) ? {color: user.userColor} : {color: "#000000"};
+    let colorStyles = (user) ? { color: user.userColor } : { color: "#000000" };
 
     return (
       <div key={ id.toString() } data-time={ timestamp } className={ `${message.type}` }>
@@ -94,7 +91,6 @@ function MessageList(props) {
         <span className={`${message.type}-content`}>
           { parsed }
         </span>
-
         
       </div>
     );
