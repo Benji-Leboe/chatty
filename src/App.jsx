@@ -16,7 +16,6 @@ class App extends Component {
       userColor: "",
       messages: messages,
       notifications: notifications,
-      images: [],
       connections: 0
     }
     this.sock = new WebSocket('ws://localhost:3001');
@@ -65,16 +64,16 @@ class App extends Component {
     this.sock.send(JSON.stringify(newNote));
   }
 
-  addImage = (link) => {
-    const newImg = {
-      status: 'outgoing',
-      id: uuid(),
-      type: 'images',
-      timestamp: new Date(),
-      content: image
-    }
-    this.sock.send(JSON.stringify(newImg));
-  }
+  // addImage = (link) => {
+  //   const newImg = {
+  //     status: 'outgoing',
+  //     id: uuid(),
+  //     type: 'images',
+  //     timestamp: new Date(),
+  //     content: image
+  //   }
+  //   this.sock.send(JSON.stringify(newImg));
+  // }
 
   updateCurrentUser = (user) => {
     const oldUsername = this.state.currentUser;

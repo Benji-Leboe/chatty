@@ -38,9 +38,9 @@ body {
   flex: 2;
 }
 
-.message {
+.messages {
   display: flex;
-  padding: 5px;
+  padding: 0.5rem;
 }
 
 .message.system {
@@ -63,6 +63,11 @@ body {
   font-weight: 700;
 }
 
+.notifications {
+  font-style: italic;
+  margin-left: 3rem;
+}
+
 .navbar {
   background: rgb(33, 74, 255);
   border-bottom: 1px solid black;
@@ -70,8 +75,17 @@ body {
   left: 0;
   padding: 0 10px;
   position: fixed;
+  display: flex;
+  justify-content: space-between;
   right: 0;
   top: 0;
+
+  .user-count {
+
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-right: 1rem;
+  }
 }
 
 .navbar-brand {
