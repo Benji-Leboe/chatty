@@ -47,14 +47,14 @@
       "id": 2,
       "type": "notifications",
       "timestamp": "2018-10-03T02:03:22.954Z",
-      "content": "Anonymous1 changed their name to nomnom"
+      "content": "\"Anonymous1\" changed their name to \"nomnom\""
     },
     {
       "status": "incoming",
       "id": 7,
       "type": "notifications",
       "timestamp": "2018-10-03T02:04:54.522Z",
-      "content": "Anonymous2 changed their name to NotFunny"
+      "content": "\"Anonymous2\" changed their name to \"NotFunny\""
     }
   ]
 }

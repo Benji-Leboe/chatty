@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function MessageList(props) {
   const elems = [...props.messages, ...props.notifications];
@@ -11,20 +11,20 @@ function MessageList(props) {
       hash  = ((hash << 5) - hash) + chr;
       hash |= 0;
     }
-    return hash += (Math.random*1000).toString(32).slice(2,6);
+    return hash;
   };
 
   function isValidUrl (string) {
     try {
-      new URL(string);
+      new URL(`http://${string}`);
     } catch (err) {
       return false;  
     }
     return true;
   }
 
-  const re = /\/(.*?)\((.*?)\)/;
-  function parser (content) {
+  function wordParser (content) {
+    const re = /\/(.*?)\((.*?)\)/;
     try {
       if (!content.match(re)) {
         throw err;
@@ -35,25 +35,42 @@ function MessageList(props) {
     const regexed = content.match(re);
     const [, cmd, value] = regexed;
 
-    return {cmd, value};
+    return { cmd, value };
   }
 
   const chatMap = {
     'img': function(url) {
-      return (<span><br /><img key={ url.hashish() } className="img-msg" src={ url } /><br /></span>);
+      try { 
+        if (!isValidUrl(url)) {
+          throw err;
+        }
+      } catch (err) {
+        return (undefined);
+      }
+      return (
+        <span key={ props.uuid() }>
+          <br /><img key={ props.uuid() } className="img-msg" src={ url } /><br />
+        </span>);
     },
     'link': function(url, content) {
-      return (<a key={url.hashish()} href={ `//${url}` }>{ content || url } </a>);
+      console.log(url, content);
+      try { 
+        if (!isValidUrl(url)) {
+          throw err;
+        }
+      } catch (err) {
+        return (undefined);
+      }
+      return (<a key={ props.uuid() } href={ `//${url}` }>{ content || url } </a>);
     },
     'bold': function(content) {
-      //console.log("test bold",content);
-      return (<strong key={ content.hashish() }>{ content } </strong>);
+      return (<strong key={ props.uuid() }>{ content } </strong>);
     },
     'ital': function(content) {
-      return (<em key={ content.hashish() }>{ content } </em>);
+      return (<em key={ props.uuid() }>{ content } </em>);
     },
     'under': function(content) {
-      return (<u key={ content.hashish() }>{ content } </u>);
+      return (<u key={ props.uuid() }>{ content } </u>);
     }
   }
 
@@ -64,27 +81,29 @@ function MessageList(props) {
   const elemArr = elems.map(message => {
     const { id, timestamp, content, user } = message;
 
-    let msgArr = content.split(/\s^\/^(.*?)^\(^(.*?)^\)/);
-    console.log(msgArr);
+    let msgArr = content.split(/(?!\(.*)\s(?![^(]*?\))/g);
 
-    const parsed = msgArr.map((curr, i) => {
-      let parsedWord = parser(curr);
+    const parsed = msgArr.map((word) => {
+      let parsedWord = wordParser(word);
       if (parsedWord.cmd) {
-        let { cmd, value } = parsedWord;
+        let { cmd, value } = parsedWord; 
+        let newVal;
+        if (cmd === 'link') {
+          newVal = value.split('; ');
+          let [url, name] = newVal;
+          return chatMap[cmd](url, name);
+        }
         return chatMap[cmd](value); 
       }
-      console.log(parsedWord);
       return parsedWord + ' ';
     });
 
-    console.log(parsed);
-
-    let colorStyles = (user) ? { color: user.userColor } : { color: "#000000" };
-
+    const colorStyles = (user) ? { color: user.userColor } : { color: "#000000" };
     return (
       <div key={ id.toString() } data-time={ timestamp } className={ `${message.type}` }>
 
-        { message.type === 'messages' && <span className="message-username" style={colorStyles}>
+        { message.type === 'messages' && 
+        <span className="message-username" style={colorStyles}>
           { user.username || 'Anonymous' }
         </span> }
 

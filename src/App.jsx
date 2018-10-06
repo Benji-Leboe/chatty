@@ -21,22 +21,19 @@ class App extends Component {
     this.sock = new WebSocket('ws://localhost:3001');
   }
 
-  numUsers = () => {
-    console.log("Nothin' yet");
-  }
-
   updateState = (entry, data) => {
     const newData = this.state[entry].concat(data);
-    this.setState({[entry]: newData}, () => {
-    });
+
+    this.setState({ [entry]: newData });
   }
 
   generateRandomHexColor = () => {
     let decimal = Math.floor(Math.random()*16777215);
 
-    let hex = (decimal > (200 * 200 * 200) || decimal < (30 * 30 * 30)) ? decimal.toString(16) : this.generateRandomHexColor();
+    let hex = (decimal < (200 * 200 * 200) && decimal > (30 * 30 * 30)) 
+      ? decimal.toString(16) : this.generateRandomHexColor();
     
-    this.setState({userColor: `#${hex}`});
+    this.setState({ userColor: `#${hex}` });
 
     return hex;
   }
@@ -47,7 +44,7 @@ class App extends Component {
       id: uuid(),
       type: 'messages',
       timestamp: new Date(),
-      user: {username: this.state.currentUser, userColor: this.state.userColor},
+      user: { username: this.state.currentUser, userColor: this.state.userColor },
       content: message
     }
     this.sock.send(JSON.stringify(newMsg));
@@ -64,33 +61,20 @@ class App extends Component {
     this.sock.send(JSON.stringify(newNote));
   }
 
-  // addImage = (link) => {
-  //   const newImg = {
-  //     status: 'outgoing',
-  //     id: uuid(),
-  //     type: 'images',
-  //     timestamp: new Date(),
-  //     content: image
-  //   }
-  //   this.sock.send(JSON.stringify(newImg));
-  // }
-
   updateCurrentUser = (user) => {
     const oldUsername = this.state.currentUser;
     
     this.setState({'currentUser': user}, () => {
-      this.addNotification(`${oldUsername} changed their name to ${this.state.currentUser}`);
+      this.addNotification(`"${oldUsername}" changed their name to "${this.state.currentUser}"`);
     }); 
   }
 
   componentDidMount() {
     this.generateRandomHexColor();
-    console.log(this.state.userColor);
+
     this.sock.onerror = (err) => {throw err};
-    // cs.onclose
 
     this.sock.onopen = () => {
-      
       this.sock.send('YEET');
     };
 
@@ -105,13 +89,14 @@ class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <Navbar userCount={this.state.connections} />
+        <Navbar userCount={ this.state.connections } />
         <Messages>
-          <MessageList images={this.state.images} notifications={this.state.notifications} messages={this.state.messages}/>
+          <MessageList uuid={uuid} images={ this.state.images } notifications={ this.state.notifications } messages={ this.state.messages }/>
         </Messages>
-        <Chatbar addImage={this.addImage} addMessage={this.addMessage} updateCurrentUser={this.updateCurrentUser} currentUser={this.state.currentUser}/>
+        <Chatbar addImage={ this.addImage } addMessage={ this.addMessage } updateCurrentUser={ this.updateCurrentUser } currentUser={ this.state.currentUser }/>
       </div>
     );
   }
 }
+
 export default App;
