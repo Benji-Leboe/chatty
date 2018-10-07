@@ -93,7 +93,7 @@ class App extends Component {
         <Messages>
           <MessageList uuid={uuid} images={ this.state.images } notifications={ this.state.notifications } messages={ this.state.messages }/>
         </Messages>
-        <Chatbar addImage={ this.addImage } addMessage={ this.addMessage } updateCurrentUser={ this.updateCurrentUser } currentUser={ this.state.currentUser }/>
+        <Chatbar addMessage={ this.addMessage } updateCurrentUser={ this.updateCurrentUser } currentUser={ this.state.currentUser }/>
       </div>
     );
   }

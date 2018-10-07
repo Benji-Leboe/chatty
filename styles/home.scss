@@ -24,6 +24,7 @@ body {
 .chatbar-message,
 .chatbar-username,
 .chatbar-button {
+  opacity: 0.8;
   border: 1px solid black;
   border-radius: 5px;
   display: block;
@@ -46,6 +47,15 @@ button .chatbar-button {
   background-color: rgb(177, 177, 177);
 }
 
+.chatbar-info {
+  display: none;
+}
+
+.messages-container {
+  display: flex;
+  max-width: 100vw;
+}
+
 .messages {
   background-color: rgba(226, 226, 226, 0.486);
   border: 1px solid rgba(155, 155, 155, 0.5);
@@ -56,7 +66,7 @@ button .chatbar-button {
 }
 
 .message-system {
-  min-width: 100%;
+  width: 100%;
   padding: 5px 20px;
 }
 
