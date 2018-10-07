@@ -1,45 +1,33 @@
-React Boilerplate
-=====================
+# Chatty 
 
-A minimal and light dev environment for ReactJS.
+### Instant messaging app for week 6 @Lighthouse Labs
 
-### Usage
+## Config
 
-Clone the boilerplate and create your own git repo.
+- Clone repo by running `git clone git@github.com:Benji-Leboe/chatty.git chatty` in desired directory
+- Run `npm install` in root directory to install dependencies (including dev)
+- Run `npm run socket`, then `npm start`
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+## Dependencies
 
-Install the dependencies and start the server.
+- React
+- Webpack
+- Websockets
+- Babel
+- node-sass/sass-loader/css-loader
+- uuid/v1
+- Express.js
+- Node.js
 
-```
-npm install
-npm start
-open http://localhost:3000
-```
+## Overview
 
-### Static Files
+Chatty is a React-based instant messaging application created for the week 6 project at Lighthouse Labs. Using websockets, it can send instant messaging data to any other clients using the application.
 
-You can store static files like images, fonts, etc in the `build` folder.
+### Features
 
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
-
-### Dependencies
-
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+- Real-time instant messaging
+- Can alter text using specific command codes
+- Can post images/gifs and hyperlinks with optional aliases
+- Randomly generated username colours that persist while in chat
+- Can change username at any time (triggers an alert notification letting others know of the change)
+- Displays number of active users

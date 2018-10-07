@@ -1,7 +1,7 @@
 import React from 'react';
 
-function MessageList(props) {
-  const elems = [...props.messages, ...props.notifications];
+function MessageList({ messages, notifications, uuid }) {
+  const elems = [...messages, ...notifications];
 
   String.prototype.hashish = function() {
     var hash = 0, i, chr;
@@ -39,6 +39,7 @@ function MessageList(props) {
   }
 
   const chatMap = {
+
     'img': function(url) {
       try { 
         if (!isValidUrl(url)) {
@@ -48,12 +49,13 @@ function MessageList(props) {
         return (undefined);
       }
       return (
-        <span key={ props.uuid() }>
-          <br /><img key={ props.uuid() } className="img-msg" src={ url } /><br />
-        </span>);
+        <span key={ uuid() }>
+          <br /><img key={ uuid() } className="img-msg" src={ url } /><br />
+        </span>
+      );
     },
+
     'link': function(url, content) {
-      console.log(url, content);
       try { 
         if (!isValidUrl(url)) {
           throw err;
@@ -61,16 +63,27 @@ function MessageList(props) {
       } catch (err) {
         return (undefined);
       }
-      return (<a key={ props.uuid() } href={ `//${url}` }>{ content || url } </a>);
+      return (
+        <a key={ uuid() } href={ `//${url}` }>{ content || url } </a>
+      );
     },
+
     'bold': function(content) {
-      return (<strong key={ props.uuid() }>{ content } </strong>);
+      return (
+        <strong key={ uuid() }>{ content } </strong>
+      );
     },
+
     'ital': function(content) {
-      return (<em key={ props.uuid() }>{ content } </em>);
+      return (
+        <em key={ uuid() }>{ content } </em>
+      );
     },
+
     'under': function(content) {
-      return (<u key={ props.uuid() }>{ content } </u>);
+      return (
+        <u key={ uuid() }>{ content } </u>
+      );
     }
   }
 

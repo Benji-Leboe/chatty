@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-function Messages (props) {
+function Messages ({ children }) {
   return (
-    <main className="messages">
+    <main className="messages-container">
       
-      <div className="message system">
-        {props.children}
+      <div className="message-system">
+        { children }
       </div>
     </main>
   );

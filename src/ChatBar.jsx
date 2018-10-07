@@ -1,30 +1,40 @@
 import React from 'react';
 
-function Chatbar (props) {
+function Chatbar ({ addMessage, updateCurrentUser, submitMessage, currentUser }) {
+
+  let textInput = React.createRef();
+
   function submitMessage(content) {
-    props.addMessage(content);
+    addMessage(content);
   }
   function updateUser(user) {
-    props.updateCurrentUser(user);
+    updateCurrentUser(user);
   }
-
+  function focusOnSubmit() {
+    textInput.current.focus();
+  }
   function handleEnter(event) {
     if (event.key === 'Enter') {
+      event.preventDefault();
       let content = event.target.value;
       if(content.length > 0) {
         if (event.target.name === 'msgInput') {
           submitMessage(content);
           event.target.value = '';
         } else if (event.target.name = 'usernameInput') {
-          updateUser(content);
+
+          if (content !== currentUser){
+            updateUser(content);
+          }
+          focusOnSubmit();
         }
       }
     }
   }
   return (
     <footer className="chatbar">
-      <input name="usernameInput" className="chatbar-username" onKeyDown={ handleEnter } defaultValue={ props.currentUser } />
-      <input name="msgInput" className="chatbar-message" onKeyDown={ handleEnter }  placeholder="Type a message and hit ENTER" />
+      <input name="usernameInput" className="chatbar-username" onKeyDown={ handleEnter } defaultValue={ currentUser } />
+      <input name="msgInput" className="chatbar-message" onKeyDown={ handleEnter } ref={ textInput } placeholder="Type a message and hit ENTER" />
     </footer>
   );
 }
