@@ -103,7 +103,7 @@ function MessageList({ messages, notifications, uuid }) {
         let newVal;
         if (cmd === 'link') {
           newVal = value.split('; ');
-          let [url, name] = newVal;
+          let [ url, name ] = newVal;
           return chatMap[cmd](url, name);
         }
         return chatMap[cmd](value); 

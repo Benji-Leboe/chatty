@@ -22,7 +22,7 @@ function Chatbar ({ addMessage, updateCurrentUser, currentUser }) {
           submitMessage(content);
           event.target.value = '';
         } else if (event.target.name = 'usernameInput') {
-          if (content !== currentUser){
+          if (content !== currentUser) {
             updateUser(content);
           }
           focusOnSubmit();
