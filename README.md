@@ -6,7 +6,7 @@
 
 Chatty is a React-based instant messaging application created for the week 6 project at Lighthouse Labs. Using websockets, it can send instant messaging data to any other clients using the application.
 
-![mainpage](/Users/benji_mbp/lighthouse/chatty/imgs/readmeImgs/main.png)
+![mainpage](./imgs/readmeImgs/main.png)
 
 ### Features
 
