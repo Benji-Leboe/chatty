@@ -105,11 +105,11 @@ function MessageList({ messages, notifications, uuid }) {
       <div key={ id.toString() } data-time={ timestamp } className={ `${message.type}` }>
 
         { message.type === 'messages' && 
-        <span className="message-username" style={colorStyles}>
+        <span className="message-username" style={ colorStyles }>
           { user.username || 'Anonymous' }
         </span> }
 
-        <span className={`${message.type}-content`}>
+        <span className={ `${message.type}-content` }>
           { parsed }
         </span>
         
