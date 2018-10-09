@@ -22,6 +22,7 @@ Chatty is a React-based instant messaging application created for the week 6 pro
 - Clone repo by running `git clone git@github.com:Benji-Leboe/chatty.git chatty` in desired directory
 - Run `npm install` in root directory to install dependencies (including dev)
 - Run `npm run socket`, then `npm start`
+- Navigate to localhost:3000
 
 ## Dependencies
 
